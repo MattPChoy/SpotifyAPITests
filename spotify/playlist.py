@@ -1,5 +1,6 @@
 from .spotify import Spotify # Class import
 from .song import Song # Class import
+from .user import User
 
 class Playlist:
     def __init__(self, id, spotify):
@@ -14,6 +15,7 @@ class Playlist:
         self.id = id
         self.__get_json_data__()
         self.__parse_json_data__()
+        self.owner = User(self.json['owner'])
 
     def __get_json_data__(self):
         """
