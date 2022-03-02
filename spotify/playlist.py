@@ -2,17 +2,16 @@ from .spotify import Spotify # Class import
 from .song import Song # Class import
 
 class Playlist:
-    def __init__(self, playlist_id, spotify):
+    def __init__(self, id, spotify):
         """
         Create an instance of the Playlist class that contains information
         parsed from the web API (which returns a JSON object.)
 
-        @param playlist_id: Spotify's unique identifier for a playlist
+        @param id: Spotify's unique identifier for a playlist
         @param spotify: Spotify object, which contains auth information
         """
         self.spotify = spotify
-        self.playlist_id = playlist_id
-
+        self.id = id
         self.__get_json_data__()
         self.__parse_json_data__()
 
@@ -21,11 +20,11 @@ class Playlist:
         Obtain the JSON data from the web
         """
         assert self.spotify is not None, "Spotify object not defined (is None)"
-        assert self.playlist_id is not None, "Playlist ID is None"
+        assert self.id is not None, "Playlist ID is None"
 
         self.json = self.spotify.sp.user_playlist(
             user="",
-            playlist_id=self.playlist_id
+            playlist_id=self.id
         )
 
     def __parse_playlist_songs__(self):
